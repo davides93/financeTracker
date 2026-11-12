@@ -1,0 +1,14 @@
+{
+  "as_of": "2026-11-06",
+  "quotes": [
+    {
+      "broker_ticker": "DEMO",
+      "isin": "IE0000000000",
+      "ticker": "DEMO",
+      "market": "XETR",
+      "currency": "EUR",
+      "price": 40,
+      "source": "https://example.com/synthetic-not-market-data"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+# Initial compatibility ranges; freeze the resolved environment before real experiments.
+chronos-forecasting>=2.2,<3
+peft>=0.18.1,<1
+exchange-calendars>=4.5,<5
+yfinance>=0.2.65,<2

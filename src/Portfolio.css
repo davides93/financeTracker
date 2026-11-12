@@ -1,0 +1,9 @@
+.investment { display: grid; gap: 18px; }
+.investment .topbar { margin-bottom: 0; }
+.investment-panel { padding: 22px; min-width: 0; }
+.investment-panel h2 { margin: 0 0 8px; }
+.investment-panel p { margin: 8px 0 0; }
+.investment-total { display: block; font-size: clamp(24px, 4vw, 36px); font-variant-numeric: tabular-nums; }
+.investment-accounts { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.investment-panel svg { display: block; width: 100%; max-height: 250px; }
+.investment-panel select { font: inherit; padding: 6px; }
