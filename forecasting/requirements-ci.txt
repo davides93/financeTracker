@@ -1,0 +1,3 @@
+# Test-only dependencies; model weights and live market downloads are unnecessary.
+exchange-calendars==4.13.2
+numpy==2.5.4

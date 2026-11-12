@@ -128,3 +128,23 @@ separatamente dall’utente; senza questi file il monitor e l’anteprima Direct
 non sono disponibili. Non aggiungere dati personali alle fixture o al codice.
 Prima di ogni pubblicazione controllare i file in staging e usare uno scanner
 per segreti; `.gitignore` non rileva dati inseriti dentro un sorgente.
+
+## Controlli automatici su GitHub
+
+La Action [CI](https://github.com/davides93/financeTracker/actions/workflows/ci.yml) viene eseguita a ogni push e
+pull request, anche sui branch diversi da `main`, ed è avviabile manualmente.
+Esegue build frontend, lint, test JavaScript e Python e Gitleaks su tutta la
+cronologia Git disponibile. La build dei pacchetti Tauri non è inclusa.
+Le dipendenze dei test Python sono separate dai modelli di ricerca e usano
+PyTorch su CPU; i test non richiedono dati personali o pesi scaricati.
+
+Il controllo privacy fallisce anche quando un file tracciato corrisponde alle
+regole `.gitignore` (per esempio dati finanziari, backup o `.env` aggiunti con
+`git add -f`). Gitleaks oscura i valori rilevati nei log; la CI non carica
+report di scansione o artefatti contenenti dati finanziari.
+
+Questi controlli avvengono **dopo il push**: un errore della Action non annulla
+la pubblicazione e lo scanner non riconosce ogni possibile dato personale.
+Prima del push controllare sempre il contenuto del commit ed eseguire
+`gitleaks git . --log-opts="--all" --redact --no-banner`. Se una credenziale
+raggiunge GitHub, revocarla o ruotarla subito, anche dopo aver rimosso il file.
