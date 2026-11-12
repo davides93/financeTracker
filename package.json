@@ -12,7 +12,10 @@
     "tauri": "tauri",
     "native:dev": "tauri dev",
     "native:build": "tauri build",
-    "native:info": "tauri info"
+    "native:info": "tauri info",
+    "prepare": "node scripts/install-hooks.mjs",
+    "hooks:install": "node scripts/install-hooks.mjs",
+    "privacy:check": "python3 scripts/check-privacy.py staged"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.12.4",

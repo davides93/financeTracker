@@ -36,6 +36,8 @@ jobs:
           mkdir -p gitleaks-bin
           tar -xzf gitleaks.tar.gz -C gitleaks-bin gitleaks
           echo "$RUNNER_TEMP/gitleaks-bin" >> "$GITHUB_PATH"
+      - name: Test local privacy guards
+        run: python3 -m unittest discover -s tests -p 'test_privacy.py' -v
       - name: Scan all Git history for secrets
         run: gitleaks git . --log-opts="--all" --redact --no-banner
 

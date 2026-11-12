@@ -148,3 +148,29 @@ la pubblicazione e lo scanner non riconosce ogni possibile dato personale.
 Prima del push controllare sempre il contenuto del commit ed eseguire
 `gitleaks git . --log-opts="--all" --redact --no-banner`. Se una credenziale
 raggiunge GitHub, revocarla o ruotarla subito, anche dopo aver rimosso il file.
+
+## Protezione locale prima di commit e push
+
+Prerequisiti: Python 3 e Gitleaks 8.30.1 o successivo (`brew install gitleaks`
+su macOS). `npm install` / `npm ci` installa gli hook locali tramite `prepare`.
+Per una copia già installata eseguire `npm run hooks:install`.
+Gli hook richiedono Gitleaks anche se l'app può funzionare senza di esso.
+
+- **pre-commit:** controlla i contenuti effettivi in staging, anche se la copia
+  di lavoro è diversa. Blocca segreti, percorsi privati, archivi, estratti,
+  email personali, IBAN validi, codici fiscali e percorsi di profili personali.
+- **pre-push:** ripete la scansione su tutti gli antenati dei commit da inviare,
+  comprese versioni intermedie successivamente cancellate.
+- Senza scanner, o se un controllo non termina correttamente, l'operazione
+  viene bloccata. I valori rilevati non vengono stampati. Symlink, submodule,
+  file oltre 5 MB e binari fuori dalle icone richiedono revisione manuale.
+
+`npm run privacy:check` controlla manualmente lo staging. Per un blocco,
+rimuovere il dato dal contenuto in staging; se già presente in un commit
+locale, ripulire anche la cronologia prima del push. Non limitarsi a cancellare
+il file in un commit successivo. Le sole email ammesse negli esempi sono nei
+domini `example.com`, `example.org`, `example.net` e `users.noreply.github.com`.
+
+Gli hook sono locali e vanno installati in ogni clone. Non possono riconoscere
+ogni nome, saldo o dato personale inserito nel codice e possono essere aggirati
+con `--no-verify`: la revisione del commit e la CI restano necessarie.
